@@ -1,11 +1,15 @@
 package com.example.mediaplayer55.pager;
 
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.mediaplayer55.R;
+import com.example.mediaplayer55.activity.MyItemDecoration;
 import com.example.mediaplayer55.adapter.MyRecyclerViewAdapter;
 import com.example.mediaplayer55.fragment.BaseFragment;
 
@@ -39,8 +43,10 @@ public class NetAudioPager extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerViewAdapter = new MyRecyclerViewAdapter(context,datas);
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.addItemDecoration(new MyItemDecoration(context, DividerItemDecoration.VERTICAL));
 
     }
+
 
 
 }
