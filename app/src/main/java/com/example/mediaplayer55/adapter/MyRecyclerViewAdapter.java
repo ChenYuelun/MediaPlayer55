@@ -1,7 +1,7 @@
 package com.example.mediaplayer55.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.mediaplayer55.R;
+import com.example.mediaplayer55.activity.ShowImageAndGifActivity;
 import com.example.mediaplayer55.domian.NetAudioBean;
 import com.example.mediaplayer55.utils.Utils;
 
@@ -24,8 +24,6 @@ import java.util.List;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
-
-import static com.example.mediaplayer55.R.id.tv_content;
 
 /**
  * Created by chenyuelun on 2017/5/30.
@@ -143,6 +141,28 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             tvShenheCaiNumber = (TextView) itemView.findViewById(R.id.tv_shenhe_cai_number);
             tvPostsNumber = (TextView) itemView.findViewById(R.id.tv_posts_number);
             llDownload = (LinearLayout) itemView.findViewById(R.id.ll_download);
+
+
+            //设置item的点击事件
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NetAudioBean.ListBean listEntity = datas.get(getLayoutPosition());
+                    if(listEntity !=null ){
+                        //3.传递视频列表
+                        Intent intent = new Intent(context,ShowImageAndGifActivity.class);
+                        if(listEntity.getType().equals("gif")){
+                            String url = listEntity.getGif().getImages().get(0);
+                            intent.putExtra("url",url);
+                            context.startActivity(intent);
+                        }else if(listEntity.getType().equals("image")){
+                            String url = listEntity.getImage().getBig().get(0);
+                            intent.putExtra("url",url);
+                            context.startActivity(intent);
+                        }
+                    }
+                }
+            });
 
         }
 
