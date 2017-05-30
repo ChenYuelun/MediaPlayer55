@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+
+    <style name="radiobutton">
+        <item name="android:gravity" >center</item>
+        <item name="android:layout_weight" >1</item>
+        <item name="android:width" >0dp</item>
+        <item name="android:layout_height" >wrap_content</item>
+        <item name="android:button" >@null</item>
+        <item name="android:drawablePadding" >3dp</item>
+        <item name="android:textColor" >@drawable/rb_textcolor_selctor</item>
+        <item name="android:padding" >5dp</item>
+        <item name="android:textSize" >12sp</item>
+    </style>
+
 </resources>
