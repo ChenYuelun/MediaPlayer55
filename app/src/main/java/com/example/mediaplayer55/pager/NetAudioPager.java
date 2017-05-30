@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.mediaplayer55.R;
+import com.example.mediaplayer55.activity.MyItemDecoration;
 import com.example.mediaplayer55.adapter.MyRecyclerViewAdapter;
 import com.example.mediaplayer55.domian.NetAudioBean;
 import com.example.mediaplayer55.fragment.BaseFragment;
@@ -93,6 +94,7 @@ public class NetAudioPager extends BaseFragment {
             myAdapter = new MyRecyclerViewAdapter(context,list);
             Log.e("TAG","设置适配器");
             recyclerview.setAdapter(myAdapter);
+            recyclerview.addItemDecoration(new MyItemDecoration(context, MyItemDecoration.VERTICAL_LIST));
         }else {
             tvNomedia.setVisibility(View.VISIBLE);
         }
