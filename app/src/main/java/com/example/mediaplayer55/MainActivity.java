@@ -1,5 +1,7 @@
 package com.example.mediaplayer55;
 
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,8 @@ import com.example.mediaplayer55.pager.NetVideoPager;
 
 import java.util.ArrayList;
 
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewpager;
     private RadioGroup rg_tab;
@@ -22,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
     private MyPagerAdapter myAdapter;
     private int position;
     private int[] rbids = {R.id.rb_local_video,R.id.rb_local_audio,R.id.rb_net_video,R.id.rb_net_audio};
+
+
+    private SensorManager sensorManager;
+    private JCVideoPlayer.JCAutoFullscreenListener sensorEventListener;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         rg_tab.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
         viewpager.addOnPageChangeListener(new MyOnPageChangeListener());
         rg_tab.check(R.id.rb_local_video);
+
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorEventListener = new JCVideoPlayer.JCAutoFullscreenListener();
     }
 
     private void initPager() {
@@ -116,5 +131,30 @@ public class MainActivity extends AppCompatActivity {
         public void onPageScrollStateChanged(int state) {
 
         }
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener(sensorEventListener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(sensorEventListener);
+        JCVideoPlayer.releaseAllVideos();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
     }
 }
