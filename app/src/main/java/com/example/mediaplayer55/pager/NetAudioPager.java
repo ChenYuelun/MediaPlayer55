@@ -1,6 +1,8 @@
 package com.example.mediaplayer55.pager;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,14 +38,26 @@ public class NetAudioPager extends BaseFragment {
     ProgressBar progressbar;
     @Bind(R.id.tv_nomedia)
     TextView tvNomedia;
+    @Bind(R.id.swiperefresh)
+    SwipeRefreshLayout swiperefresh;
+
     private String url = "http://s.budejie.com/topic/list/jingxuan/1/budejie-android-6.2.8/0-20.json?market=baidu&udid=863425026599592&appname=baisibudejie&os=4.2.2&client=android&visiting=&mac=98%3A6c%3Af5%3A4b%3A72%3A6d&ver=6.2.8";
     private List<NetAudioBean.ListBean> list;
     private MyRecyclerViewAdapter myAdapter;
+    private int[] colors = {Color.BLUE,Color.RED,Color.YELLOW,Color.GREEN};
 
     @Override
     public View initView() {
         View view = View.inflate(context, R.layout.net_audio_recycler, null);
         ButterKnife.bind(this, view);
+        swiperefresh.setColorSchemeColors(colors);
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                getDataFormNet();
+            }
+        });
         return view;
     }
 
@@ -61,6 +75,7 @@ public class NetAudioPager extends BaseFragment {
             public void onSuccess(String result) {
                 Log.e("TAG", "Network request success,result:" + result);
                 processData(result);
+                swiperefresh.setRefreshing(false);
             }
 
             @Override
