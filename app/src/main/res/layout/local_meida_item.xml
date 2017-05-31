@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:minHeight="100dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:padding="8dp"
+        android:src="@drawable/clapboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/ll_fileInfo"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:id="@+id/fileName"
+            android:text="fileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:id="@+id/duration"
+            android:text="fileDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/fileSize"
+        android:textSize="18sp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="bottom"
+        android:textColor="#000000"
+        android:text="FileSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
