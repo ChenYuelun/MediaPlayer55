@@ -6,6 +6,7 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/iv_icon"
         android:padding="8dp"
         android:src="@drawable/clapboard"
         android:layout_width="wrap_content"

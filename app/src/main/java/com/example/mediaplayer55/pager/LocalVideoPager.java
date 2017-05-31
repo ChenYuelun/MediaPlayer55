@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 
 public class LocalVideoPager extends BaseFragment {
     private static final int DATA_IS_REDAY = 1;
-    @Bind(R.id.local_video_)
+    @Bind(R.id.local_video_pager)
     ListView localVideo;
     @Bind(R.id.tv_nomedia)
     TextView tvNomedia;
@@ -98,6 +98,10 @@ public class LocalVideoPager extends BaseFragment {
 
     @Override
     public void onDestroyView() {
+        if(handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
+        }
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

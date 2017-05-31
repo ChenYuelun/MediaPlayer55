@@ -4,14 +4,12 @@
 
     android:layout_height="match_parent">
 
-    <ListView
-        android:divider="@color/colorDivider"
-        android:dividerHeight="1dp"
-        android:id="@+id/local_video_pager"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/local_audio_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
     <TextView
         android:id="@+id/tv_nomedia"
